@@ -255,6 +255,9 @@ window.addEventListener('DOMContentLoaded', () => {
                      }, 2000);
                  } else {
                      statusMessage.textContent = message.failure;
+                     setTimeout(() => {
+                        statusMessage.remove();
+                    }, 2000);
                  }
              });
          });
