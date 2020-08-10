@@ -223,11 +223,8 @@ window.addEventListener('DOMContentLoaded', () => {
      function postDate(form) {
          form.addEventListener('submit', (e) => {
              e.preventDefault();
- 
-             const statusMessage = document.createElement('div');
-             statusMessage.classList.add('status');
-             statusMessage.textContent = message.loading;
-             form.append(statusMessage);
+             const modalInfo = document.querySelector(".modal__info");
+             modalInfo.textContent = message.loading;
  
              const request = new XMLHttpRequest();
  
@@ -240,7 +237,7 @@ window.addEventListener('DOMContentLoaded', () => {
              formData.forEach(function(value, key) {
                  object[key] = value;
              });
- 
+
              const json = JSON.stringify(object);
  
              request.send(json);
@@ -248,15 +245,15 @@ window.addEventListener('DOMContentLoaded', () => {
              request.addEventListener('load', () => {
                  if (request.status === 200) {
                      console.log(request.response);
-                     statusMessage.textContent = message.succsess;
+                     modalInfo.textContent = message.succsess;
                      form.reset();
                      setTimeout(() => {
-                         statusMessage.remove();
+                        modalInfo.innerText = "";
                      }, 2000);
                  } else {
-                     statusMessage.textContent = message.failure;
+                    modalInfo.textContent = message.failure;
                      setTimeout(() => {
-                        statusMessage.remove();
+                        modalInfo.innerText = "";
                     }, 2000);
                  }
              });
